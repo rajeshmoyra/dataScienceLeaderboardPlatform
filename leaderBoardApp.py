@@ -42,7 +42,7 @@ subNbr = 1
 # max number of submissions a user is allowed to make in a rolling 24hr period
 dailyLimit = 2
 # set the contest deadline where users can no longer upload and private score is published
-contestDeadline = time.mktime(datetime(2016, 10, 21, 0, 0).timetuple())
+contestDeadline = time.mktime(datetime(2022, 3, 31, 0, 0).timetuple())
 # debug variable that if True allows private leaderboard to be displayed before contest deadline
 # normally should be False
 showPrivate = False
@@ -59,7 +59,7 @@ def get_db():
     """
     top = _app_ctx_stack.top
     if not hasattr(top, 'sqlite_db'):
-        top.sqlite_db = sqlite3.connect(app.config['DATABASE'])
+        top.sqlite_db = sqlite3.connect('dsLeaderBoard.db')   #connect(app.config['DATABASE'])
         top.sqlite_db.row_factory = sqlite3.Row
     return top.sqlite_db
 
@@ -480,4 +480,5 @@ if __name__ == '__main__':
         init_db()
     if not os.path.exists(UPLOAD_FOLDER):
         os.mkdir(UPLOAD_FOLDER)
-    app.run()
+    
+    app.run(host='0.0.0.0')
